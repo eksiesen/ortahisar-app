@@ -33,6 +33,7 @@ const CATEGORY_STYLES = {
   park: { color: '#0D9488', icon: 'leaf' }, // Turkuaz Yapraklı İşaretçi
   manzara: { color: '#D97706', icon: 'eye' }, // Turuncu Göz/Dürbün İşaretçi
   isletme: { color: '#EF4444', icon: 'storefront' }, // Kırmızı İşletme İşaretçisi
+  dolmus: { color: '#3B82F6', icon: 'car' }, // Mavi Dolmuş Durağı İşaretçisi
 } as const;
 
 // 512x512 Viewport SVG paths for custom HTML5 rendering inside Leaflet
@@ -42,13 +43,14 @@ const SVG_ICONS = {
   leaf: `<path d="M160 48v224c0 70.6 57.4 128 128 128h16V304c0-70.6-57.4-128-128-128H160z"/>`,
   eye: `<path d="M256 96C128 96 32 192 32 256s96 160 224 160 224-96 224-160-96-160-224-160zm0 256c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zm0-160c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z"/>`,
   storefront: `<path d="M48 32v48h416V32H48zm0 80v32l32 48v240h352V192l32-48v-32H48zm224 240h-64v-64h64v64zm128-64H112v-96h288v96z"/>`,
+  car: `<path d="M400 192H112a32 32 0 00-32 32v144a32 32 0 0032 32h16a32 32 0 0032-32v-16h208v16a32 32 0 0032 32h16a32 32 0 0032-32V224a32 32 0 00-32-32zm-256 128a24 24 0 1124-24 24 24 0 01-24 24zm192 0a24 24 0 1124-24 24 24 0 01-24 24z"/>`,
 } as const;
 
 interface MapPoint {
   key: string;
   title: string;
   category: string;
-  categoryKey: 'dogal' | 'tarihi' | 'park' | 'manzara' | 'isletme';
+  categoryKey: 'dogal' | 'tarihi' | 'park' | 'manzara' | 'isletme' | 'dolmus';
   detailKey: string;
   image: any;
   tags: string[];
@@ -341,6 +343,30 @@ const MAP_POINTS: MapPoint[] = [
     lat: 41.004612377811206,
     lng: 39.72308529629611,
   },
+
+  // --- DOLMUŞ DURAKLARI ---
+  { key: 'p-aydinlikevler', title: 'Postane - Aydınlıkevler', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00694023127856, lng: 39.72396549223134 },
+  { key: 'p-besirli', title: 'Postane - Beşirli', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00703738683742, lng: 39.72422298429274 },
+  { key: 'p-camlik', title: 'Postane - Çamlık', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00630096403004, lng: 39.72431295917866 },
+  { key: 'p-kurucesme', title: 'Postane - Kuruçeşme', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00638192779012, lng: 39.72450607823613 },
+  { key: 'p-karsiyaka', title: 'Postane - Karşıyaka', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.006479084173115, lng: 39.72474211262841 },
+  { key: 'p-yesiltepe', title: 'Postane - Yeşiltepe', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00648509643725, lng: 39.72499612478102 },
+  { key: 'p-yenimahalle', title: 'Postane - Yenimahalle', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00653367456364, lng: 39.72505506711441 },
+  { key: 'p-bahcecik', title: 'Postane - Bahçecik', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00658225267422, lng: 39.725237397800925 },
+  { key: 'p-catak', title: 'Postane - Çatak', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00630697629395, lng: 39.724716648074455 },
+  { key: 'p-erdogdu', title: 'Postane - Erdoğdu Camiyanı', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.0063069763029, lng: 39.724939924776585 },
+  { key: 'p-kurankursu', title: 'Postane - Kurankursu', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00638794006531, lng: 39.725030994112934 },
+  { key: 't-yenicuma', title: 'Tanjant - Yenicuma', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00390886029602, lng: 39.731202000733916 },
+  { key: 't-boztepe', title: 'Tanjant - Boztepe', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.003733139772066, lng: 39.73111617004029 },
+  { key: 't-yesiltepe', title: 'Tanjant - Yeşiltepe', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.003947345862244, lng: 39.731609696495966 },
+  { key: 't-kurankursu', title: 'Tanjant - Kurankursu', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00393115252039, lng: 39.73173844254546 },
+  { key: 't-degirmendere', title: 'Tanjant - Değirmendere', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00383399235108, lng: 39.731738442532716 },
+  { key: 't-yenimahalle', title: 'Tanjant - Yenimahalle', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00368825190336, lng: 39.73171698487232 },
+  { key: 't-caglayan', title: 'Tanjant - Çağlayan', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00347773733897, lng: 39.73165261183078 },
+  { key: 't-ktu', title: 'Tanjant - KTÜ', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00306344155076, lng: 39.731845730892836 },
+  { key: 't-havalimani', title: 'Tanjant - Havalimanı', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00288942074333, lng: 39.731953019271145 },
+  { key: 't-tip', title: 'Tanjant - Tıp Fakültesi', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.003004243455905, lng: 39.732024388536715 },
+  { key: 't-aydinlikevler', title: 'Tanjant - Aydınlıkevler', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.003902335468496, lng: 39.73167406626473 },
 ];
 
 export function HomeScreen() {
@@ -350,7 +376,7 @@ export function HomeScreen() {
     useNavigation<BottomTabNavigationProp<RootTabParamList>>();
 
   const [searchQuery, setSearchQuery] = React.useState('');
-  const [selectedKey, setSelectedKey] = React.useState<string>('ganita');
+  const [selectedKey, setSelectedKey] = React.useState<string>('');
 
   const flatListRef = React.useRef<FlatList<MapPoint>>(null);
   const mapRef = React.useRef<any>(null);
@@ -370,6 +396,8 @@ export function HomeScreen() {
         lng: point.lng,
         color: style.color,
         svgIcon: SVG_ICONS[style.icon],
+        categoryKey: point.categoryKey,
+        detailKey: point.detailKey,
       };
     });
 
@@ -438,7 +466,7 @@ export function HomeScreen() {
       zoomControl: false,
       minZoom: 4,
       maxZoom: 18
-    }).setView([41.0027, 39.7168], 13);
+    }).setView([41.006624700467356, 39.7374947331336], 14);
 
     // Standard road layer tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -451,6 +479,17 @@ export function HomeScreen() {
 
     pointsData.forEach(function(point) {
       var isDefaultSelected = (point.key === '${selectedKey}');
+
+      // --- Popup HTML (no inline onclick - avoids quote-escaping crashes) ---
+      // detailKey === '' is the most reliable dolmuş stop signal (all other points have a non-empty detailKey)
+      var popupContent = '<div style="font-family: sans-serif; padding: 6px; text-align: center; min-width: 140px;">';
+      popupContent += '<b style="font-size: 14px; color: #1F2937; display: block; margin-bottom: 8px;">' + point.title + '</b>';
+      if (!point.detailKey || point.detailKey === '') {
+        popupContent += '<button id="btn-' + point.key + '" style="background-color: #3B82F6; color: white; border: none; padding: 8px 12px; font-size: 12px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; display: block; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Yol Tarifi Al</button>';
+      }
+      popupContent += '</div>';
+
+      // --- Marker icon HTML ---
       var markerHtml = '<div class="custom-marker" id="marker-' + point.key + '">';
       markerHtml += '<div class="pulse-circle" style="border-color: ' + point.color + '; display: ' + (isDefaultSelected ? 'block' : 'none') + ';"></div>';
       markerHtml += '<div class="marker-bubble" style="background-color: ' + point.color + '; width: ' + (isDefaultSelected ? '34px' : '28px') + '; height: ' + (isDefaultSelected ? '34px' : '28px') + '; border-radius: ' + (isDefaultSelected ? '17px' : '14px') + '">';
@@ -467,13 +506,33 @@ export function HomeScreen() {
       });
 
       var marker = L.marker([point.lat, point.lng], { icon: customIcon }).addTo(map);
-      
+
+      marker.bindPopup(popupContent, { closeButton: false, offset: [0, -10] });
+
+      // Wire the "Yol Tarifi Al" button safely after the popup opens in the DOM
+      marker.on('popupopen', function() {
+        var btn = document.getElementById('btn-' + point.key);
+        if (btn) {
+          btn.onclick = function(e) {
+            if (e) e.preventDefault();
+            var msg = JSON.stringify({ type: 'ROUTE_TO_STOP', lat: point.lat, lng: point.lng });
+            if (window.ReactNativeWebView) {
+              window.ReactNativeWebView.postMessage(msg);
+            } else {
+              window.parent.postMessage(msg, '*');
+            }
+          };
+        }
+      });
+
       marker.on('click', function() {
-        var msg = JSON.stringify({ type: 'PIN_SELECTED', key: point.key });
-        if (window.ReactNativeWebView) {
-          window.ReactNativeWebView.postMessage(msg);
-        } else {
-          window.parent.postMessage(msg, '*');
+        if (point.detailKey !== '') {
+          var msg = JSON.stringify({ type: 'PIN_SELECTED', key: point.key });
+          if (window.ReactNativeWebView) {
+            window.ReactNativeWebView.postMessage(msg);
+          } else {
+            window.parent.postMessage(msg, '*');
+          }
         }
       });
 
@@ -484,31 +543,51 @@ export function HomeScreen() {
     });
 
     function selectPin(key) {
-      var markerInfo = markers[key];
-      if (markerInfo) {
-        Object.keys(markers).forEach(function(k) {
-          var el = document.getElementById('marker-' + k);
-          if (el) {
-            var pulse = el.querySelector('.pulse-circle');
-            var bubble = el.querySelector('.marker-bubble');
-            if (pulse) pulse.style.display = (k === key) ? 'block' : 'none';
-            if (bubble) {
-              if (k === key) {
-                bubble.style.width = '34px';
-                bubble.style.height = '34px';
-                bubble.style.borderRadius = '17px';
-              } else {
-                bubble.style.width = '28px';
-                bubble.style.height = '28px';
-                bubble.style.borderRadius = '14px';
-              }
+      // Reset all markers to default state first
+      Object.keys(markers).forEach(function(k) {
+        var el = document.getElementById('marker-' + k);
+        if (el) {
+          var pulse = el.querySelector('.pulse-circle');
+          var bubble = el.querySelector('.marker-bubble');
+          if (pulse) pulse.style.display = (k === key && key !== '') ? 'block' : 'none';
+          if (bubble) {
+            if (k === key && key !== '') {
+              bubble.style.width = '34px';
+              bubble.style.height = '34px';
+              bubble.style.borderRadius = '17px';
+            } else {
+              bubble.style.width = '28px';
+              bubble.style.height = '28px';
+              bubble.style.borderRadius = '14px';
             }
           }
-        });
-        map.setView([markerInfo.point.lat, markerInfo.point.lng], 15, { animate: true });
+        }
+      });
+      if (key !== '' && markers[key]) {
+        map.setView([markers[key].point.lat, markers[key].point.lng], 15, { animate: true });
       }
     }
     window.selectPin = selectPin;
+
+    // Clear selection when tapping empty map area
+    map.on('click', function(e) {
+      var target = e.originalEvent.target;
+      if (
+        target.id === 'map' ||
+        target.classList.contains('leaflet-container') ||
+        target.classList.contains('leaflet-tile') ||
+        target.classList.contains('leaflet-tile-container') ||
+        target.tagName === 'CANVAS'
+      ) {
+        selectPin('');
+        var msg = JSON.stringify({ type: 'CLEAR_SELECTION' });
+        if (window.ReactNativeWebView) {
+          window.ReactNativeWebView.postMessage(msg);
+        } else {
+          window.parent.postMessage(msg, '*');
+        }
+      }
+    });
 
     window.addEventListener('message', function(event) {
       try {
@@ -550,7 +629,8 @@ export function HomeScreen() {
           const data = JSON.parse(event.data);
           if (data.type === 'PIN_SELECTED') {
             setSelectedKey(data.key);
-            const index = MAP_POINTS.findIndex((p) => p.key === data.key);
+            const carouselPoints = MAP_POINTS.filter((p) => p.detailKey !== '');
+            const index = carouselPoints.findIndex((p) => p.key === data.key);
             if (index !== -1) {
               flatListRef.current?.scrollToIndex({
                 index,
@@ -558,6 +638,11 @@ export function HomeScreen() {
                 viewPosition: 0.5,
               });
             }
+          } else if (data.type === 'CLEAR_SELECTION') {
+            setSelectedKey('');
+          } else if (data.type === 'ROUTE_TO_STOP') {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lng}`;
+            Linking.openURL(url);
           }
         } catch (e) {
           // Ignore non-json frames messages
@@ -597,8 +682,9 @@ export function HomeScreen() {
   };
 
   const handleCardPress = (item: MapPoint) => {
+    if (item.categoryKey === 'dolmus') return; // dolmuş stops have no Places detail page
     navigation.navigate('Places', {
-      categoryKey: item.categoryKey,
+      categoryKey: item.categoryKey as 'dogal' | 'tarihi' | 'park' | 'manzara' | 'isletme',
       detailKey: item.detailKey,
     });
   };
@@ -630,7 +716,8 @@ export function HomeScreen() {
       const data = JSON.parse(event.nativeEvent.data);
       if (data.type === 'PIN_SELECTED') {
         setSelectedKey(data.key);
-        const index = MAP_POINTS.findIndex((p) => p.key === data.key);
+        const carouselPoints = MAP_POINTS.filter((p) => p.detailKey !== '');
+        const index = carouselPoints.findIndex((p) => p.key === data.key);
         if (index !== -1) {
           flatListRef.current?.scrollToIndex({
             index,
@@ -638,17 +725,24 @@ export function HomeScreen() {
             viewPosition: 0.5,
           });
         }
+      } else if (data.type === 'CLEAR_SELECTION') {
+        setSelectedKey('');
+      } else if (data.type === 'ROUTE_TO_STOP') {
+        const url = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lng}`;
+        Linking.openURL(url);
       }
     } catch (e) {
       console.warn('Failed parsing native webview frame message:', e);
     }
   };
 
+  const CAROUSEL_POINTS = MAP_POINTS.filter((p) => p.detailKey !== '');
+
   const onMomentumScrollEnd = (event: any) => {
     const contentOffset = event.nativeEvent.contentOffset.x;
     const index = Math.round(contentOffset / (CARD_WIDTH + CARD_GAP));
-    if (index >= 0 && index < MAP_POINTS.length) {
-      setSelectedKey(MAP_POINTS[index].key);
+    if (index >= 0 && index < CAROUSEL_POINTS.length) {
+      setSelectedKey(CAROUSEL_POINTS[index].key);
     }
   };
 
@@ -666,26 +760,28 @@ export function HomeScreen() {
           cardShadow,
         ]}
       >
-        <ImageBackground
-          source={item.image}
-          style={styles.cardImage}
-          imageStyle={styles.cardImageRadius}
-          resizeMode="cover"
-        >
-          <View style={styles.cardOverlay} />
-          <View style={styles.cardContent}>
-            <View style={[styles.cardTagWrap, { backgroundColor: `${style.color}40` }]}>
-              <Text style={styles.cardTagText}>{item.category}</Text>
-            </View>
-            <Text style={styles.cardTitle} numberOfLines={1}>
-              {item.title}
-            </Text>
-            <View style={styles.cardDetailRow}>
-              <Text style={styles.cardDetailLink}>Detayları Gör</Text>
-              <Ionicons name="arrow-forward" size={12} color="#FFF" />
-            </View>
+        {/* Üst Kısım: Resim Konteyneri */}
+        <View style={styles.cardImageContainer}>
+          <ImageBackground
+            source={item.image}
+            style={styles.cardImage}
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Alt Kısım: Beyaz İçerik Alanı */}
+        <View style={styles.cardContentContainer}>
+          <View style={[styles.cardTagWrap, { backgroundColor: style.color }]}>
+            <Text style={styles.cardTagText}>{item.category}</Text>
           </View>
-        </ImageBackground>
+          <Text style={styles.cardTitle} numberOfLines={1}>
+            {item.title}
+          </Text>
+          <View style={styles.cardDetailRow}>
+            <Text style={[styles.cardDetailLink, { color: style.color }]}>Detayları Gör</Text>
+            <Ionicons name="arrow-forward" size={12} color={style.color} />
+          </View>
+        </View>
       </Pressable>
     );
   };
@@ -857,13 +953,19 @@ export function HomeScreen() {
               </View>
               <Text style={styles.legendText}>İşletme</Text>
             </View>
+            <View style={styles.legendItem}>
+              <View style={[styles.legendDot, { backgroundColor: CATEGORY_STYLES.dolmus.color }]}>
+                <Ionicons name={CATEGORY_STYLES.dolmus.icon as any} size={8.5} color="#FFF" />
+              </View>
+              <Text style={styles.legendText}>Dolmuş</Text>
+            </View>
           </View>
 
           {/* Yatay Önizleme Carousel'i */}
           <View style={[styles.carouselWrapper, { paddingBottom: tabBarHeight + 14 }]}>
             <FlatList
               ref={flatListRef}
-              data={MAP_POINTS}
+              data={CAROUSEL_POINTS}
               renderItem={renderCarouselItem}
               keyExtractor={(item) => item.key}
               horizontal
@@ -982,10 +1084,10 @@ const styles = StyleSheet.create({
   },
   carouselCard: {
     width: CARD_WIDTH,
-    height: 114,
+    height: 170,
     borderRadius: radius.lg,
     marginRight: CARD_GAP,
-    backgroundColor: colors.surface,
+    backgroundColor: '#FFFFFF',
     borderWidth: 1.5,
     borderColor: '#E5E7EB',
     overflow: 'hidden',
@@ -993,48 +1095,59 @@ const styles = StyleSheet.create({
   carouselCardSelected: {
     borderWidth: 2.5,
   },
+  cardImageContainer: {
+    width: '100%',
+    height: '55%',
+    backgroundColor: '#F3F4F6',
+  },
   cardImage: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    width: '100%',
+    height: '100%',
   },
   cardImageRadius: {
     borderRadius: radius.md,
   },
   cardOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.38)',
+    backgroundColor: 'rgba(0, 0, 0, 0.20)',
+    borderRadius: radius.md,
+  },
+  cardContentContainer: {
+    width: '100%',
+    height: '45%',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
   },
   cardContent: {
     padding: 10,
   },
   cardTagWrap: {
     alignSelf: 'flex-start',
-    paddingHorizontal: 6,
+    paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 4,
-    marginBottom: 4,
   },
   cardTagText: {
     fontSize: 9,
-    fontWeight: '700',
+    fontWeight: '800',
     color: '#FFF',
   },
   cardTitle: {
-    fontSize: 14.5,
-    fontWeight: '900',
-    color: '#FFF',
-    letterSpacing: -0.2,
+    fontSize: 14,
+    fontWeight: '800',
+    color: '#1F2937',
+    marginTop: 2,
   },
   cardDetailRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    marginTop: 4,
   },
   cardDetailLink: {
-    fontSize: 10.5,
+    fontSize: 11,
     fontWeight: '700',
-    color: '#FFF',
   },
   scroll: {
     paddingHorizontal: 20,
