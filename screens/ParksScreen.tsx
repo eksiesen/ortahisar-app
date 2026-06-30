@@ -45,7 +45,7 @@ export const PARKS: readonly Park[] = [
     mapUrl: 'https://share.google/pcp3E0Dn8mGnQLfcA',
     transport: {
       kind: 'two',
-      dolmusText: 'Postane - Bahçecik dolmuşları kullanılabilir.',
+      dolmusText: 'Bahçecik dolmuşları kullanılabilir.',
       otobusText:
         '105 numaralı belediye otobüsü kullanılarak 1523 - Bahçecik Yol Ayrımı durağında inilebilir.',
     },
@@ -143,22 +143,40 @@ export const PARKS: readonly Park[] = [
 export function ParksScreen({
   onBack,
   onSelect,
+  view,
 }: {
   onBack: () => void;
   onSelect: (park: Park) => void;
+  view: string;
 }) {
   const insets = useSafeAreaInsets();
   const tabBarHeight = useBottomTabBarHeight();
+  const [showListStickyBack, setShowListStickyBack] = React.useState(false);
+  const scrollViewRef = React.useRef<ScrollView>(null);
+  const prevViewRef = React.useRef<string | null>(null);
+
+  React.useEffect(() => {
+    if (view === 'parklar' && prevViewRef.current === 'root') {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+    }
+    prevViewRef.current = view;
+  }, [view]);
 
   return (
     <View style={[styles.root, { paddingTop: insets.top }]}>
       <ScrollView
+        ref={scrollViewRef}
         contentContainerStyle={[
           styles.scroll,
           { paddingBottom: tabBarHeight + 28 },
         ]}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        onScroll={(event) => {
+          const offsetY = event.nativeEvent.contentOffset.y;
+          setShowListStickyBack(offsetY > 180);
+        }}
+        scrollEventThrottle={16}
       >
         <Pressable
           accessibilityRole="button"
@@ -220,6 +238,19 @@ export function ParksScreen({
           ))}
         </View>
       </ScrollView>
+      {showListStickyBack && (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Geri Dön"
+          onPress={onBack}
+          style={({ pressed }) => [
+            styles.stickyBackBtn,
+            pressed && { opacity: 0.8, transform: [{ scale: 0.95 }] },
+          ]}
+        >
+          <Ionicons name="chevron-back" size={24} color={colors.secondary} />
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -336,5 +367,23 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.94,
     transform: [{ scale: 0.995 }],
+  },
+  stickyBackBtn: {
+    position: 'absolute',
+    left: 0,
+    top: '50%',
+    marginTop: -30,
+    width: 40,
+    height: 60,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderLeftWidth: 0,
+    elevation: 5,
+    zIndex: 999,
   },
 });

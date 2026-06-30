@@ -4,7 +4,6 @@ import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import {
-  Alert,
   FlatList,
   ImageBackground,
   Linking,
@@ -14,6 +13,7 @@ import {
   StyleSheet,
   Text,
   View,
+  UIManager,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SearchField } from '../components/home/SearchField';
@@ -367,6 +367,32 @@ const MAP_POINTS: MapPoint[] = [
   { key: 't-havalimani', title: 'Tanjant - Havalimanı', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.00288942074333, lng: 39.731953019271145 },
   { key: 't-tip', title: 'Tanjant - Tıp Fakültesi', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.003004243455905, lng: 39.732024388536715 },
   { key: 't-aydinlikevler', title: 'Tanjant - Aydınlıkevler', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.003902335468496, lng: 39.73167406626473 },
+  { key: 'moloz-fatih', title: 'Moloz - Fatih', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01061327786868, lng: 39.722575569877826 },
+  // --- MOLOZ KALKIŞLI DURAKLAR ---
+  { key: 'moloz-pinaralti-sayvan', title: 'Moloz - Pınaraltı Sayvan', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01119588041446, lng: 39.7181466919046 },
+  { key: 'moloz-aktoprak', title: 'Moloz - Aktoprak', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.0110987309658, lng: 39.71801794567291 },
+  { key: 'moloz-karlik', title: 'Moloz - Karlık', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01119588039435, lng: 39.71806086103921 },
+  { key: 'moloz-gurbulak', title: 'Moloz - Gürbulak', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01100158141222, lng: 39.718103776499575 },
+  { key: 'moloz-gecit-magmat', title: 'Moloz - Geçit Mağmat', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.0109044317116, lng: 39.71797503039499 },
+  { key: 'moloz-karakaya', title: 'Moloz - Karakaya', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01064536509651, lng: 39.71797503027523 },
+  { key: 'moloz-akkaya', title: 'Moloz - Akkaya', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01074251515645, lng: 39.71801794565265 },
+  { key: 'moloz-subasi', title: 'Moloz - Subaşı', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01077489852321, lng: 39.718060861044755 },
+  { key: 'moloz-kirechane', title: 'Moloz - Kireçhane', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01061298164838, lng: 39.717907049706525 },
+  { key: 'moloz-yenikoy-ugurlu', title: 'Moloz - Yeniköy Uğurlu', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.0103539139439, lng: 39.71808216105399 },
+  { key: 'moloz-agilli', title: 'Moloz - Aığıllı', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01090443170341, lng: 39.718404183829996 },
+  { key: 'moloz-dogancay', title: 'Moloz - Doğançay', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.010904431690896, lng: 39.71836126852998 },
+  { key: 'moloz-bahcecik', title: 'Moloz - Bahçecik', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01105045238021, lng: 39.72318795037495 },
+  { key: 'moloz-besirli', title: 'Moloz - Beşirli', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01095330274293, lng: 39.72294123135833 },
+  { key: 'moloz-yenimahalle', title: 'Moloz - Yenimahalle', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01071042801193, lng: 39.72276606601601 },
+  { key: 'moloz-degirmendere', title: 'Moloz - Değirmendere', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.010856238906044, lng: 39.723359556390164 },
+  { key: 'moloz-karsiyaka', title: 'Moloz - Karşıyaka', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01075575748531, lng: 39.72327372418408 },
+  { key: 'moloz-aydinlikevler', title: 'Moloz - Aydınlıkevler', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01072764882014, lng: 39.723295689209294 },
+  { key: 'moloz-yesiltepe', title: 'Moloz - Yeşiltepe', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01079138635507, lng: 39.72313307738533 },
+  { key: 'moloz-camlik', title: 'Moloz - Çamlık', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.010783376474485, lng: 39.723649234964675 },
+  { key: 'moloz-kurucesme', title: 'Moloz - Kuruçeşme', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.010750993145656, lng: 39.7235097600996 },
+  { key: 'moloz-catak', title: 'Moloz - Çatak', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.010564788694694, lng: 39.723423929424015 },
+  { key: 'moloz-camiyani', title: 'Moloz - Camiyanı', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01057288454504, lng: 39.72335955640349 },
+  { key: 'moloz-caglayan', title: 'Moloz - Çağlayan', category: 'Dolmuş Durakları', categoryKey: 'dolmus', detailKey: '', image: null, tags: [], lat: 41.01044335072484, lng: 39.7235634042647 },
 ];
 
 export function HomeScreen() {
@@ -377,6 +403,29 @@ export function HomeScreen() {
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [selectedKey, setSelectedKey] = React.useState<string>('');
+  const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
+  const [selectedStopKeys, setSelectedStopKeys] = React.useState<string[]>([]);
+
+  const toggleCategory = (catKey: string) => {
+    setSelectedCategories(prev =>
+      prev.includes(catKey) ? prev.filter(c => c !== catKey) : [...prev, catKey]
+    );
+    setSelectedKey(''); // Seçim değiştiğinde aktif pin odağını sıfırla
+  };
+
+  const toggleStopSelection = (stopKey: string) => {
+    setSelectedStopKeys(prev =>
+      prev.includes(stopKey) ? prev.filter(k => k !== stopKey) : [...prev, stopKey]
+    );
+  };
+
+  const CAROUSEL_POINTS = React.useMemo(() => {
+    let pts = MAP_POINTS.filter((p) => p.detailKey !== '');
+    if (selectedCategories.length > 0) {
+      pts = pts.filter((p) => selectedCategories.includes(p.categoryKey));
+    }
+    return pts;
+  }, [selectedCategories]);
 
   const flatListRef = React.useRef<FlatList<MapPoint>>(null);
   const mapRef = React.useRef<any>(null);
@@ -387,7 +436,23 @@ export function HomeScreen() {
 
   // Leaflet JS dynamic HTML source code configuration
   const mapHtml = React.useMemo(() => {
-    const pointsData = MAP_POINTS.map((point) => {
+    const filteredPoints = MAP_POINTS.filter((point) => {
+      // First, filter by main categories
+      if (selectedCategories.length > 0) {
+        if (!selectedCategories.includes(point.categoryKey)) {
+          return false;
+        }
+      }
+      // Second, if it's a dolmuş stop and selectedStopKeys is not empty, filter by selectedStopKeys
+      if (point.categoryKey === 'dolmus') {
+        if (selectedStopKeys.length > 0) {
+          return selectedStopKeys.includes(point.key);
+        }
+      }
+      return true;
+    });
+
+    const pointsData = filteredPoints.map((point) => {
       const style = CATEGORY_STYLES[point.categoryKey];
       return {
         key: point.key,
@@ -473,7 +538,6 @@ export function HomeScreen() {
       maxZoom: 18,
       attribution: '&copy; OpenStreetMap'
     }).addTo(map);
-
     var markers = {};
     var pointsData = ${JSON.stringify(pointsData)};
 
@@ -605,7 +669,7 @@ export function HomeScreen() {
 </body>
 </html>
     `;
-  }, []);
+  }, [selectedCategories, selectedStopKeys]);
 
   // Listen to carousel selection changes and pan/zoom map automatically
   React.useEffect(() => {
@@ -629,7 +693,7 @@ export function HomeScreen() {
           const data = JSON.parse(event.data);
           if (data.type === 'PIN_SELECTED') {
             setSelectedKey(data.key);
-            const carouselPoints = MAP_POINTS.filter((p) => p.detailKey !== '');
+            const carouselPoints = CAROUSEL_POINTS;
             const index = carouselPoints.findIndex((p) => p.key === data.key);
             if (index !== -1) {
               flatListRef.current?.scrollToIndex({
@@ -640,6 +704,7 @@ export function HomeScreen() {
             }
           } else if (data.type === 'CLEAR_SELECTION') {
             setSelectedKey('');
+            setSelectedStopKeys([]);
           } else if (data.type === 'ROUTE_TO_STOP') {
             const url = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lng}`;
             Linking.openURL(url);
@@ -658,26 +723,6 @@ export function HomeScreen() {
       const url = 'https://www.trabzonortahisar.bel.tr/duyurular';
       const can = await Linking.canOpenURL(url);
       if (can) await Linking.openURL(url);
-    } else if (key === 'sikayet') {
-      Alert.alert(
-        'Çözüm Masası / İletişim',
-        'Ortahisar Belediyesi Çözüm Masası ile iletişime geçmek için bir kanal seçin:',
-        [
-          {
-            text: 'WhatsApp Çözüm Hattı',
-            onPress: () =>
-              Linking.openURL('http://api.whatsapp.com/send?phone=905423366161'),
-          },
-          {
-            text: 'Çağrı Merkezini Ara',
-            onPress: () => Linking.openURL('tel:4446589'),
-          },
-          {
-            text: 'İptal',
-            style: 'cancel',
-          },
-        ]
-      );
     }
   };
 
@@ -716,7 +761,7 @@ export function HomeScreen() {
       const data = JSON.parse(event.nativeEvent.data);
       if (data.type === 'PIN_SELECTED') {
         setSelectedKey(data.key);
-        const carouselPoints = MAP_POINTS.filter((p) => p.detailKey !== '');
+        const carouselPoints = CAROUSEL_POINTS;
         const index = carouselPoints.findIndex((p) => p.key === data.key);
         if (index !== -1) {
           flatListRef.current?.scrollToIndex({
@@ -727,6 +772,7 @@ export function HomeScreen() {
         }
       } else if (data.type === 'CLEAR_SELECTION') {
         setSelectedKey('');
+        setSelectedStopKeys([]);
       } else if (data.type === 'ROUTE_TO_STOP') {
         const url = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lng}`;
         Linking.openURL(url);
@@ -735,8 +781,6 @@ export function HomeScreen() {
       console.warn('Failed parsing native webview frame message:', e);
     }
   };
-
-  const CAROUSEL_POINTS = MAP_POINTS.filter((p) => p.detailKey !== '');
 
   const onMomentumScrollEnd = (event: any) => {
     const contentOffset = event.nativeEvent.contentOffset.x;
@@ -796,38 +840,102 @@ export function HomeScreen() {
           onClear={() => setSearchQuery('')}
         />
         {searchQuery.trim().length === 0 && (
-          <View style={styles.microBtnRow}>
+          <View style={styles.topButtonsRow}>
+            {/* Duyurular Butonu */}
             <Pressable
               accessibilityRole="button"
               accessibilityLabel="Duyurular"
               onPress={() => handleQuickAccess('duyuru')}
               style={({ pressed }) => [
-                styles.microBtn,
-                pressed && styles.pressed,
+                styles.topBadgeBtn,
+                pressed && { opacity: 0.85 },
               ]}
             >
               <Ionicons
                 name="megaphone-outline"
-                size={13}
+                size={15}
                 color={colors.primary}
               />
-              <Text style={styles.microBtnText}>Duyurular</Text>
+              <Text style={styles.topBadgeBtnText}>Duyurular</Text>
             </Pressable>
+
+            {/* Haberler Butonu */}
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Şikayet / İstek"
-              onPress={() => handleQuickAccess('sikayet')}
+              accessibilityLabel="Haberler"
+              onPress={() => Linking.openURL('https://www.trabzonortahisar.bel.tr/haberler')}
               style={({ pressed }) => [
-                styles.microBtn,
-                pressed && styles.pressed,
+                styles.topBadgeBtn,
+                pressed && { opacity: 0.85 },
               ]}
             >
               <Ionicons
-                name="chatbubbles-outline"
-                size={13}
+                name="newspaper-outline"
+                size={15}
                 color={colors.primary}
               />
-              <Text style={styles.microBtnText}>Şikayet / İstek</Text>
+              <Text style={styles.topBadgeBtnText}>Haberler</Text>
+            </Pressable>
+
+            {/* YENİ: Web Sitemiz Butonu */}
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Web Sitemiz"
+              onPress={() => Linking.openURL('https://www.trabzonortahisar.bel.tr/')}
+              style={({ pressed }) => [
+                styles.topBadgeBtn,
+                pressed && { opacity: 0.85 },
+              ]}
+            >
+              <Ionicons
+                name="globe-outline"
+                size={15}
+                color={colors.primary}
+              />
+              <Text style={styles.topBadgeBtnText}>Web Sitemiz</Text>
+            </Pressable>
+          </View>
+        )}
+        {searchQuery.trim().length === 0 && (
+          <View style={styles.socialMediaRow}>
+            {/* Facebook */}
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Ortahisar Belediyesi Facebook Sayfası"
+              onPress={() => Linking.openURL('https://www.facebook.com/trbortahisarbel?mibextid=ZbWKwL')}
+              style={({ pressed }) => [styles.socialIconBtn, pressed && { opacity: 0.75, transform: [{ scale: 0.95 }] }]}
+            >
+              <Ionicons name="logo-facebook" size={20} color="#1877F2" />
+            </Pressable>
+
+            {/* X (Twitter) */}
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Ortahisar Belediyesi X Hesabı"
+              onPress={() => Linking.openURL('https://x.com/trbortahisarbel')}
+              style={({ pressed }) => [styles.socialIconBtn, pressed && { opacity: 0.75, transform: [{ scale: 0.95 }] }]}
+            >
+              <Ionicons name="logo-twitter" size={20} color="#000000" />
+            </Pressable>
+
+            {/* Instagram */}
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Ortahisar Belediyesi Instagram Hesabı"
+              onPress={() => Linking.openURL('https://www.instagram.com/trortahisarbel/')}
+              style={({ pressed }) => [styles.socialIconBtn, pressed && { opacity: 0.75, transform: [{ scale: 0.95 }] }]}
+            >
+              <Ionicons name="logo-instagram" size={20} color="#E1306C" />
+            </Pressable>
+
+            {/* YouTube */}
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Ortahisar Belediyesi YouTube Kanalı"
+              onPress={() => Linking.openURL('https://www.youtube.com/channel/UCspHo01bOgAIRfS8HXPwSLg?reload=9')}
+              style={({ pressed }) => [styles.socialIconBtn, pressed && { opacity: 0.75, transform: [{ scale: 0.95 }] }]}
+            >
+              <Ionicons name="logo-youtube" size={20} color="#FF0000" />
             </Pressable>
           </View>
         )}
@@ -883,7 +991,15 @@ export function HomeScreen() {
         </ScrollView>
       ) : (
         /* Canlı İnteraktif Harita ve Carousel Bölümü */
-        <View style={styles.mainContainer}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[
+            styles.scroll,
+            { paddingBottom: tabBarHeight + 40 }
+          ]}
+          keyboardShouldPersistTaps="handled"
+          nestedScrollEnabled={true}
+        >
           {/* Canlı Harita Konteyneri */}
           <View style={[styles.mapWrapper, cardShadow]}>
             <WebViewComponent
@@ -923,46 +1039,137 @@ export function HomeScreen() {
 
           {/* Harita Lejantı (Legend) */}
           <View style={styles.legendContainer}>
-            <View style={styles.legendItem}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Doğal Güzellikler Filtresi"
+              onPress={() => toggleCategory('dogal')}
+              style={[
+                styles.legendItem,
+                { opacity: selectedCategories.length > 0 && !selectedCategories.includes('dogal') ? 0.4 : 1.0 }
+              ]}
+            >
               <View style={[styles.legendDot, { backgroundColor: CATEGORY_STYLES.dogal.color }]}>
                 <Ionicons name={CATEGORY_STYLES.dogal.icon as any} size={8.5} color="#FFF" />
               </View>
               <Text style={styles.legendText}>Doğa</Text>
-            </View>
-            <View style={styles.legendItem}>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Tarihi Yerler Filtresi"
+              onPress={() => toggleCategory('tarihi')}
+              style={[
+                styles.legendItem,
+                { opacity: selectedCategories.length > 0 && !selectedCategories.includes('tarihi') ? 0.4 : 1.0 }
+              ]}
+            >
               <View style={[styles.legendDot, { backgroundColor: CATEGORY_STYLES.tarihi.color }]}>
                 <Ionicons name={CATEGORY_STYLES.tarihi.icon as any} size={8.5} color="#FFF" />
               </View>
               <Text style={styles.legendText}>Tarih</Text>
-            </View>
-            <View style={styles.legendItem}>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Parklar Filtresi"
+              onPress={() => toggleCategory('park')}
+              style={[
+                styles.legendItem,
+                { opacity: selectedCategories.length > 0 && !selectedCategories.includes('park') ? 0.4 : 1.0 }
+              ]}
+            >
               <View style={[styles.legendDot, { backgroundColor: CATEGORY_STYLES.park.color }]}>
                 <Ionicons name={CATEGORY_STYLES.park.icon as any} size={8.5} color="#FFF" />
               </View>
               <Text style={styles.legendText}>Park</Text>
-            </View>
-            <View style={styles.legendItem}>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Manzara Noktaları Filtresi"
+              onPress={() => toggleCategory('manzara')}
+              style={[
+                styles.legendItem,
+                { opacity: selectedCategories.length > 0 && !selectedCategories.includes('manzara') ? 0.4 : 1.0 }
+              ]}
+            >
               <View style={[styles.legendDot, { backgroundColor: CATEGORY_STYLES.manzara.color }]}>
                 <Ionicons name={CATEGORY_STYLES.manzara.icon as any} size={8.5} color="#FFF" />
               </View>
               <Text style={styles.legendText}>Manzara</Text>
-            </View>
-            <View style={styles.legendItem}>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="İşletmeler Filtresi"
+              onPress={() => toggleCategory('isletme')}
+              style={[
+                styles.legendItem,
+                { opacity: selectedCategories.length > 0 && !selectedCategories.includes('isletme') ? 0.4 : 1.0 }
+              ]}
+            >
               <View style={[styles.legendDot, { backgroundColor: CATEGORY_STYLES.isletme.color }]}>
                 <Ionicons name={CATEGORY_STYLES.isletme.icon as any} size={8.5} color="#FFF" />
               </View>
               <Text style={styles.legendText}>İşletme</Text>
-            </View>
-            <View style={styles.legendItem}>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Dolmuş Durakları Filtresi"
+              onPress={() => toggleCategory('dolmus')}
+              style={[
+                styles.legendItem,
+                { opacity: selectedCategories.length > 0 && !selectedCategories.includes('dolmus') ? 0.4 : 1.0 }
+              ]}
+            >
               <View style={[styles.legendDot, { backgroundColor: CATEGORY_STYLES.dolmus.color }]}>
                 <Ionicons name={CATEGORY_STYLES.dolmus.icon as any} size={8.5} color="#FFF" />
               </View>
               <Text style={styles.legendText}>Dolmuş</Text>
-            </View>
+            </Pressable>
           </View>
 
           {/* Yatay Önizleme Carousel'i */}
           <View style={[styles.carouselWrapper, { paddingBottom: tabBarHeight + 14 }]}>
+            {selectedCategories.length === 1 && selectedCategories.includes('dolmus') && (
+              <View style={styles.dolmusLegend}>
+                <Text style={styles.dolmusLegendText}>
+                  ℹ️ <Text style={{fontWeight: 'bold'}}>P:</Text> Postane | <Text style={{fontWeight: 'bold'}}>T:</Text> Tanjant | <Text style={{fontWeight: 'bold'}}>M:</Text> Moloz
+                </Text>
+              </View>
+            )}
+            {/* Durak Çipleri Artık Doğrudan Kartların Tepesinde Sabit kalacak */}
+            {selectedCategories.includes('dolmus') && (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.stopChipsContainer}
+              >
+                {MAP_POINTS.filter(p => p.categoryKey === 'dolmus').map((stop) => {
+                  const isStopSelected = selectedStopKeys.includes(stop.key);
+                  return (
+                    <Pressable
+                      key={stop.key}
+                      onPress={() => toggleStopSelection(stop.key)}
+                      style={[
+                        styles.stopChip,
+                        isStopSelected && styles.stopChipSelected,
+                        { opacity: selectedStopKeys.length > 0 && !isStopSelected ? 0.5 : 1.0 }
+                      ]}
+                    >
+                      <Ionicons 
+                        name="bus-outline" 
+                        size={12} 
+                        color={isStopSelected ? '#FFFFFF' : '#3B82F6'} 
+                      />
+                      <Text style={[
+                        styles.stopChipText,
+                        isStopSelected && styles.stopChipTextSelected
+                      ]}>
+                        {stop.title.replace('Postane - ', 'P - ').replace('Tanjant - ', 'T - ').replace('Moloz - ', 'M - ')}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </ScrollView>
+            )}
+
             <FlatList
               ref={flatListRef}
               data={CAROUSEL_POINTS}
@@ -981,7 +1188,7 @@ export function HomeScreen() {
               })}
             />
           </View>
-        </View>
+        </ScrollView>
       )}
     </View>
   );
@@ -997,27 +1204,55 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     backgroundColor: '#F3F4F6',
   },
-  microBtnRow: {
-    flexDirection: 'row',
-    gap: 8,
-    marginTop: 8,
-    marginBottom: 10,
-  },
-  microBtn: {
+  topButtonsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 99,
-    backgroundColor: '#E5E7EB', // Sade pastel açık gri butonlar
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
+    justifyContent: 'space-between',
+    gap: 8,
+    marginBottom: 16,
+    marginTop: 4,
   },
-  microBtnText: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#374151',
+  topBadgeBtn: {
+    flex: 1, // Üç butonun da satırı eşit paylaşmasını sağlar
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    backgroundColor: colors.secondarySoft,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    minWidth: 95, // Taşmaları önlemek için güvenli minimum genişlik
+  },
+  topBadgeBtnText: {
+    fontSize: 12, // Üç buton yan yana sığsın diye yazı boyutunu 12 yaptık
+    fontWeight: '800',
+    color: colors.textPrimary,
+  },
+  socialMediaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 16,
+    marginBottom: 16,
+  },
+  socialIconBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.surface,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: colors.border,
+    // Hafif gölge efekti
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 2,
+    elevation: 2,
   },
   pressed: {
     opacity: 0.82,
@@ -1028,7 +1263,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   mapWrapper: {
-    flex: 1,
     minHeight: 280,
     backgroundColor: '#E5E7EB',
     borderRadius: radius.xl,
@@ -1038,6 +1272,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     position: 'relative',
     overflow: 'hidden',
+    paddingBottom: 16,
   },
   iframeStyle: {
     width: '100%',
@@ -1247,9 +1482,51 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  legendText: {
+   legendText: {
     fontSize: 9.5,
     fontWeight: '800',
     color: '#4B5563',
+  },
+  stopChipsContainer: {
+    paddingHorizontal: 20,
+    gap: 8,
+    marginBottom: 12,
+    height: 32,
+  },
+  stopChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: '#EFF6FF',
+    paddingHorizontal: 10,
+    borderRadius: 99,
+    borderWidth: 1,
+    borderColor: '#BFDBFE',
+    height: 28,
+  },
+  stopChipSelected: {
+    backgroundColor: '#3B82F6',
+    borderColor: '#2563EB',
+  },
+  stopChipText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#1E40AF',
+  },
+  stopChipTextSelected: {
+    color: '#FFFFFF',
+  },
+  dolmusLegend: {
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    backgroundColor: '#f1f5f9',
+    borderRadius: 8,
+    marginHorizontal: 20,
+    marginBottom: 8,
+    alignSelf: 'flex-start',
+  },
+  dolmusLegendText: {
+    fontSize: 12,
+    color: '#475569',
   },
 });

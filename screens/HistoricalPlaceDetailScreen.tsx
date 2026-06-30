@@ -29,6 +29,7 @@ export function HistoricalPlaceDetailScreen({
   const tabBarHeight = useBottomTabBarHeight();
   const navigation =
     useNavigation<BottomTabNavigationProp<RootTabParamList>>();
+  const [showStickyBack, setShowStickyBack] = React.useState(false);
 
   const openUrl = async (url: string) => {
     const can = await Linking.canOpenURL(url);
@@ -44,6 +45,11 @@ export function HistoricalPlaceDetailScreen({
         ]}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        onScroll={(event) => {
+          const offsetY = event.nativeEvent.contentOffset.y;
+          setShowStickyBack(offsetY > 150);
+        }}
+        scrollEventThrottle={16}
       >
         <Pressable
           accessibilityRole="button"
@@ -216,6 +222,19 @@ export function HistoricalPlaceDetailScreen({
           </View>
         )}
       </ScrollView>
+      {showStickyBack && (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Geri Dön"
+          onPress={onBack}
+          style={({ pressed }) => [
+            styles.stickyBackBtn,
+            pressed && { opacity: 0.8, transform: [{ scale: 0.95 }] },
+          ]}
+        >
+          <Ionicons name="chevron-back" size={24} color={colors.secondary} />
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -424,6 +443,24 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.94,
     transform: [{ scale: 0.995 }],
+  },
+  stickyBackBtn: {
+    position: 'absolute',
+    left: 0,
+    top: '50%',
+    marginTop: -30,
+    width: 40,
+    height: 60,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderLeftWidth: 0,
+    elevation: 5,
+    zIndex: 999,
   },
 });
 

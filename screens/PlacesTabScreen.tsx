@@ -37,54 +37,141 @@ import { colors, radius } from '../theme';
 type PlacesView =
   | 'root'
   | 'dogal'
+  | 'dogal-detail'
   | 'tarihi'
   | 'tarihi-detail'
   | 'parklar'
   | 'parklar-detail'
   | 'manzara'
   | 'manzara-detail'
-  | 'ganita'
-  | 'boztepe-dogal'
-  | 'botanik'
-  | 'zagnos'
   | 'isletme'
   | 'isletme-detail';
 
-export const NATURAL_PLACES = [
+export interface NatureSpot {
+  key: string;
+  title: string;
+  meta: string;
+  description: string;
+  tags: string[];
+  image: any;
+  locationMapUrl: string;
+  restaurantSuggestion?: {
+    name: string;
+    mapUrl: string;
+  };
+  visitBullets: string[];
+  transport?: {
+    kind: 'two';
+    dolmusText: string;
+    otobusText: string;
+  } | {
+    kind: 'single';
+    title: string;
+    text: string;
+  };
+}
+
+export const NATURAL_PLACES: readonly NatureSpot[] = [
   {
     key: 'ganita',
     title: 'Ganita Sahil Bandı',
-    description: 'Ortahisar’da deniz esintisi ve sahil yürüyüşü',
-    tags: ['Sahil', 'Manzara', 'Yürüyüş'],
+    meta: 'Ortahisar / Sahil Bandı',
+    description: 'Ortahisar Belediyesi tarafından yenilenen Ganita Sahil Bandı; yürüyüş yolları, yeşil alanlar, kafeler, seyir terasları and gün batımı manzarasıyla kentin en popüler sahil dinlenme alanıdır.',
+    tags: ['Sahil', 'Gün Batımı', 'Yürüyüş', 'Dinlenme'],
     image: require('../assets/places/ganita-sahil.jpg'),
+    locationMapUrl: 'https://maps.app.goo.gl/m39M5Ees8YJ3yqXm8',
+    restaurantSuggestion: {
+      name: 'Dalyan Kafe',
+      mapUrl: 'https://maps.app.goo.gl/GanitaDalyanKafe'
+    },
+    visitBullets: [
+      '- Ortalama süre: 1-2 saat',
+      '- En uygun zaman: Her mevsim, özellikle gün batımı saatleri',
+      '- Giriş: Ücretsiz ve halka açık'
+    ],
+    transport: {
+      kind: 'single',
+      title: 'Ulaşım Bilgisi',
+      text: 'Ganita Sahil Bandı, Trabzon Meydan bölgesine yaklaşık 10-15 dakikalık yürüme mesafesinde bulunmaktadır. Merkez duraklardan yürüyerek kolayca ulaşabilirsiniz.'
+    }
   },
   {
     key: 'boztepe-dogal',
     title: 'Boztepe Seyir Alanı',
-    description: 'Şehri kuş bakışı izleyebileceğiniz doğal tepe konumu',
-    tags: ['Manzara', 'Seyir', 'Tepe'],
+    meta: 'Ortahisar / Seyir Noktası',
+    description: "Şehri ve Karadeniz'i kuş bakışı izlemek isteyenlerin ilk adresi olan Boztepe, yürüyüş yolları, seyir terasları ve çay bahçeleriyle hem turistlerin hem de yerel halkın uğrak yeridir.",
+    tags: ['Manzara', 'Seyir Terası', 'Fotoğraf', 'Çay Keyfi'],
     image: require('../assets/places/boztepe-seyir.jpg'),
+    locationMapUrl: 'https://maps.app.goo.gl/WvpxUymV78N5aG6q8',
+    restaurantSuggestion: {
+      name: 'Boztepe Çay Bahçesi',
+      mapUrl: 'https://maps.app.goo.gl/BoztepeCayBahcesi'
+    },
+    visitBullets: [
+      '- Ortalama süre: 1-2 saat',
+      '- En uygun zaman: Akşamüstü / Gece manzarası için akşam',
+      '- Not: Semaver çayı eşliğinde manzara önerilir.'
+    ],
+    transport: {
+      kind: 'two',
+      dolmusText: 'Boztepe dolmuşları kullanılabilir.',
+      otobusText: '141 numaralı belediye otobüsü kullanılarak Kemik Hastanesi durağında inilebilir. Sonrasında yaklaşık 10 dakikalık bir yürüyüş mesafesi bulunmaktadır.'
+    }
   },
   {
     key: 'botanik',
     title: 'Trabzon Botanik Bahçesi',
-    description: 'Çamoba’da yeşillikler içinde zengin bitki çeşitliliği',
-    tags: ['Doğa', 'Botanik', 'Yürüyüş'],
+    meta: 'Ortahisar / Botanik Bahçesi',
+    description: 'Çamoba bölgesinde yer alan Trabzon Botanik Bahçesi, zengin bitki çeşitliliği, yürüyüş yolları, göletleri ve ahşap yapılarıyla doğayla baş başa vakit geçirmek isteyenler için harika bir adrestir.',
+    tags: ['Doğa', 'Botanik', 'Yürüyüş', 'Huzur'],
     image: require('../assets/places/botanik.jpg'),
+    locationMapUrl: 'https://maps.app.goo.gl/d8E4L2wV46N3X9sR6',
+    restaurantSuggestion: {
+      name: 'Botanik Sosyal Tesisleri & Cafe',
+      mapUrl: 'https://maps.app.goo.gl/BotanikSosyalTesis'
+    },
+    visitBullets: [
+      '- Ortalama süre: 1-2 saat',
+      '- Giriş: Belediye tarafından belirlenen küçük bir giriş ücreti bulunmaktadır.',
+      '- Not: Çocuk oyun alanları ve dinlenme çardakları mevcuttur.'
+    ],
+    transport: {
+      kind: 'two',
+      dolmusText: 'Çatak dolmuşları kullanılabilir.',
+      otobusText: '117 numaralı belediye otobüsü kullanılarak Atakent durağında veya Botanik Bahçesi yakınındaki durakta inilebilir.'
+    }
   },
   {
     key: 'zagnos',
     title: 'Zağnos Vadisi Parkı',
-    description: 'Tarihi surların gölgesinde yeşil vadi alanı',
-    tags: ['Vadi', 'Park', 'Tarih'],
+    meta: 'Ortahisar / Kent Parkı',
+    description: 'Kentsel dönüşüm projesiyle yeşil bir vadiye dönüştürülen Zağnos Vadisi, tarihi surların gölgesinde yapay göletleri, köprüleri, yürüyüş yolları ve dinlenme alanlarıyla şehrin merkezinde devasa bir yeşil alandır.',
+    tags: ['Vadi', 'Kent Parkı', 'Tarihi Surlar', 'Yürüyüş'],
     image: require('../assets/places/zagnos-park.jpg'),
+    locationMapUrl: 'https://maps.app.goo.gl/ZağnosVadisi',
+    restaurantSuggestion: {
+      name: 'Zağnos Vadi Kafe',
+      mapUrl: 'https://maps.app.goo.gl/zagnos'
+    },
+    visitBullets: [
+      '- Ortalama süre: 1 saat',
+      '- Giriş: Ücretsiz ve halka açık',
+      '- Not: Park içerisinde yer alan kuğular ve ördekler özellikle çocukların ilgisini çekmektedir.'
+    ],
+    transport: {
+      kind: 'two',
+      dolmusText: 'Bahçecik dolmuşları kullanılabilir.',
+      otobusText: 'Şehir içi otobüs hatlarının büyük çoğunluğu Zağnos Köprüsü ve vadi yakınından geçmektedir.'
+    }
   },
-] as const;
+];
 
 export function PlacesTabScreen() {
   const insets = useSafeAreaInsets();
   const tabBarHeight = useBottomTabBarHeight();
   const [view, setView] = React.useState<PlacesView>('root');
+  const [selectedNature, setSelectedNature] =
+    React.useState<NatureSpot | null>(null);
   const [selectedHistorical, setSelectedHistorical] =
     React.useState<HistoricalPlace | null>(null);
   const [selectedPark, setSelectedPark] = React.useState<Park | null>(null);
@@ -96,6 +183,20 @@ export function PlacesTabScreen() {
   const navigation =
     useNavigation<BottomTabNavigationProp<RootTabParamList>>();
   const route = useRoute<RouteProp<RootTabParamList, 'Places'>>();
+  const [showStickyBack, setShowStickyBack] = React.useState(false);
+  const [showListStickyBack, setShowListStickyBack] = React.useState(false);
+  const dogalScrollRef = React.useRef<ScrollView>(null);
+
+  const prevViewRef = React.useRef<PlacesView | null>(null);
+
+  React.useEffect(() => {
+    setShowStickyBack(false);
+    setShowListStickyBack(false);
+    if (view === 'dogal' && prevViewRef.current === 'root') {
+      dogalScrollRef.current?.scrollTo({ y: 0, animated: false });
+    }
+    prevViewRef.current = view;
+  }, [view]);
 
   React.useEffect(() => {
     const categoryKey = route.params?.categoryKey;
@@ -103,7 +204,13 @@ export function PlacesTabScreen() {
 
     if (categoryKey) {
       if (categoryKey === 'dogal' && detailKey) {
-        setView(detailKey as PlacesView);
+        const found = NATURAL_PLACES.find((p) => p.key === detailKey);
+        if (found) {
+          setSelectedNature(found);
+          setView('dogal-detail');
+        } else {
+          setView('dogal');
+        }
       } else if (categoryKey === 'tarihi' && detailKey) {
         const found = HISTORICAL_PLACES.find((p) => p.key === detailKey);
         if (found) {
@@ -149,606 +256,74 @@ export function PlacesTabScreen() {
     if (can) await Linking.openURL(url);
   };
 
-  if (view === 'ganita') {
-    const cover = require('../assets/places/ganita-sahil.jpg');
-
-    return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
+  return (
+    <View style={[styles.root, { paddingTop: insets.top }]}>
+      {/* Root view */}
+      <View style={{ display: view === 'root' ? 'flex' : 'none', flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
             styles.scroll,
             { paddingBottom: tabBarHeight + 28 },
           ]}
           showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
         >
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Geri"
-            onPress={() => setView('dogal')}
-            style={({ pressed }) => [
-              styles.backBtn,
-              pressed && { opacity: 0.9 },
-            ]}
-            hitSlop={10}
-          >
-            <Ionicons name="chevron-back" size={18} color={colors.textPrimary} />
-            <Text style={styles.backText}>Doğal Güzellikler</Text>
-          </Pressable>
-
-          <View style={[styles.detailCoverCard, cardShadow]}>
-            <ImageBackground
-              source={cover}
-              style={styles.detailCoverImg}
-              imageStyle={styles.detailCoverImgRadius}
-              resizeMode="cover"
-            >
-              <View style={styles.detailCoverOverlay} />
-            </ImageBackground>
-          </View>
-
-          <Text style={styles.detailTitle}>Ganita Sahil Bandı</Text>
-          <Text style={styles.detailMeta}>Ortahisar / Sahil Bandı</Text>
-
-          <View style={styles.detailTags}>
-            {['Sahil', 'Gün Batımı', 'Yürüyüş', 'Dinlenme'].map((t) => (
-              <View key={t} style={styles.natureTag}>
-                <Text style={styles.natureTagText}>{t}</Text>
-              </View>
-            ))}
-          </View>
-
-          <Text style={styles.detailDesc}>
-            Ortahisar Belediyesi tarafından yenilenen Ganita Sahil Bandı; yürüyüş yolları, yeşil alanlar, kafeler, seyir terasları ve gün batımı manzarasıyla kentin en popüler sahil dinlenme alanıdır.
-          </Text>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons
-                  name="restaurant-outline"
-                  size={18}
-                  color={colors.secondary}
-                />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Mekan Önerileri</Text>
+          <View style={styles.hero}>
+            <View style={styles.heroBadge}>
+              <Ionicons name="trail-sign-outline" size={18} color={colors.secondary} />
+              <Text style={styles.heroBadgeText}>Şehir rehberi</Text>
             </View>
-
-            <View style={styles.restaurantCard}>
-              <Text style={styles.restaurantName}>Dalyan Kafe</Text>
-              <Pressable
-                accessibilityRole="button"
-                accessibilityLabel="Haritada Aç"
-                onPress={() => openUrl('https://maps.app.goo.gl/GanitaDalyanKafe')}
-                style={({ pressed }) => [
-                  styles.restaurantBtn,
-                  pressed && { opacity: 0.92 },
-                ]}
-              >
-                <Text style={styles.restaurantBtnText}>Haritada Aç</Text>
-                <Ionicons name="open-outline" size={18} color={colors.secondary} />
-              </Pressable>
-            </View>
-            <Text style={styles.restaurantNote}>
-              Öneriler herhangi bir reklam veya sponsorluk
-              içermemektedir. Mekanlar yalnızca ziyaretçilere fikir vermesi
-              amacıyla örnek olarak paylaşılmıştır.
+            <Text style={styles.heroTitle}>Gezilecek Yerler</Text>
+            <Text style={styles.heroLead}>
+              İlçelere dağılan doğa ve tarih duraklarından Boztepe manzarasına —
+              Trabzon gezisinde öncelik vereceğin başlıklar.
             </Text>
           </View>
 
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons name="pin-outline" size={18} color={colors.secondary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Konum</Text>
-            </View>
-
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Haritada Aç"
-              onPress={() => openUrl('https://maps.app.goo.gl/m39M5Ees8YJ3yqXm8')}
-              style={({ pressed }) => [
-                styles.primaryBtn,
-                pressed && styles.pressed,
-              ]}
-            >
-              <Text style={styles.primaryBtnText}>Haritada Aç</Text>
-              <Ionicons name="open-outline" size={18} color={colors.surface} />
-            </Pressable>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconStops]}>
-                <Ionicons name="navigate-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Nasıl Gidilir?</Text>
-            </View>
-
-            <View style={styles.howBlock}>
-              <Text style={styles.howTitle}>Yürüyüş</Text>
-              <Text style={styles.howText}>
-                Ortahisar Meydanı'ndan (şehir merkezi) güneye doğru yürüyerek yaklaşık 10-15 dakikada sahile inip Ganita'ya ulaşabilirsiniz.
-              </Text>
-            </View>
-
-            <View style={styles.detailDivider} />
-
-            <View style={styles.howBlock}>
-              <Text style={styles.howTitle}>Dolmuş / Otobüs</Text>
-              <Text style={styles.howText}>
-                Meydan'dan kalkan Beşirli dolmuşları veya sahil güzergahından geçen belediye otobüsleri ile kolayca ulaşım sağlanabilir.
-              </Text>
-            </View>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconQr]}>
-                <Ionicons name="time-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Ziyaret Bilgileri</Text>
-            </View>
-
-            <View style={[styles.detailBullets, { marginTop: 10 }]}>
-              <Text style={styles.detailBullet}>- Ortalama süre: 1-2 saat</Text>
-              <Text style={styles.detailBullet}>
-                - En uygun zaman: Her mevsim, özellikle gün batımı saatleri
-              </Text>
-              <Text style={styles.detailBullet}>- Giriş: Ücretsiz ve halka açık</Text>
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
-
-  if (view === 'boztepe-dogal') {
-    const cover = require('../assets/places/boztepe-seyir.jpg');
-
-    return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
-        <ScrollView
-          contentContainerStyle={[
-            styles.scroll,
-            { paddingBottom: tabBarHeight + 28 },
-          ]}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-        >
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Geri"
-            onPress={() => setView('dogal')}
-            style={({ pressed }) => [
-              styles.backBtn,
-              pressed && { opacity: 0.9 },
-            ]}
-            hitSlop={10}
-          >
-            <Ionicons name="chevron-back" size={18} color={colors.textPrimary} />
-            <Text style={styles.backText}>Doğal Güzellikler</Text>
-          </Pressable>
-
-          <View style={[styles.detailCoverCard, cardShadow]}>
-            <ImageBackground
-              source={cover}
-              style={styles.detailCoverImg}
-              imageStyle={styles.detailCoverImgRadius}
-              resizeMode="cover"
-            >
-              <View style={styles.detailCoverOverlay} />
-            </ImageBackground>
-          </View>
-
-          <Text style={styles.detailTitle}>Boztepe Seyir Alanı</Text>
-          <Text style={styles.detailMeta}>Ortahisar / Seyir Noktası</Text>
-
-          <View style={styles.detailTags}>
-            {['Manzara', 'Seyir Terası', 'Fotoğraf', 'Çay Keyfi'].map((t) => (
-              <View key={t} style={styles.natureTag}>
-                <Text style={styles.natureTagText}>{t}</Text>
-              </View>
+          <Text style={styles.sectionLabel}>Kategoriler</Text>
+          <View style={styles.catWrap}>
+            {PLACE_CATEGORIES.map((c) => (
+              <Pressable
+                key={c.key}
+                style={({ pressed }) => [
+                  styles.catCard,
+                  cardShadow,
+                  pressed && styles.pressed,
+                ]}
+                accessibilityRole="button"
+                accessibilityLabel={c.label}
+                onPress={() => {
+                  if (c.key === 'dogal') setView('dogal');
+                  if (c.key === 'tarihi') setView('tarihi');
+                  if (c.key === 'park') setView('parklar');
+                  if (c.key === 'manzara') setView('manzara');
+                  if (c.key === 'isletme') setView('isletme');
+                }}
+              >
+                <View style={styles.catIcon}>
+                  <Ionicons name={c.icon} size={22} color={colors.primary} />
+                </View>
+                <Text style={styles.catTitle}>{c.label}</Text>
+              </Pressable>
             ))}
           </View>
-
-          <Text style={styles.detailDesc}>
-            Şehri ve Karadeniz'i kuş bakışı izlemek isteyenlerin ilk adresi olan Boztepe, yürüyüş yolları, seyir terasları ve çay bahçeleriyle hem turistlerin hem de yerel halkın uğrak yeridir.
-          </Text>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons
-                  name="restaurant-outline"
-                  size={18}
-                  color={colors.secondary}
-                />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Mekan Önerileri</Text>
-            </View>
-
-            <View style={styles.restaurantCard}>
-              <Text style={styles.restaurantName}>Boztepe Çay Bahçesi</Text>
-              <Pressable
-                accessibilityRole="button"
-                accessibilityLabel="Haritada Aç"
-                onPress={() => openUrl('https://maps.app.goo.gl/BoztepeCayBahcesi')}
-                style={({ pressed }) => [
-                  styles.restaurantBtn,
-                  pressed && { opacity: 0.92 },
-                ]}
-              >
-                <Text style={styles.restaurantBtnText}>Haritada Aç</Text>
-                <Ionicons name="open-outline" size={18} color={colors.secondary} />
-              </Pressable>
-            </View>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons name="pin-outline" size={18} color={colors.secondary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Konum</Text>
-            </View>
-
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Haritada Aç"
-              onPress={() => openUrl('https://maps.app.goo.gl/WvpxUymV78N5aG6q8')}
-              style={({ pressed }) => [
-                styles.primaryBtn,
-                pressed && styles.pressed,
-              ]}
-            >
-              <Text style={styles.primaryBtnText}>Haritada Aç</Text>
-              <Ionicons name="open-outline" size={18} color={colors.surface} />
-            </Pressable>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconStops]}>
-                <Ionicons name="navigate-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Nasıl Gidilir?</Text>
-            </View>
-
-            <View style={styles.howBlock}>
-              <Text style={styles.howTitle}>Dolmuş</Text>
-              <Text style={styles.howText}>
-                Meydan bölgesinden kalkan Boztepe dolmuşları ile yaklaşık 10 dakikada doğrudan seyir alanına ulaşabilirsiniz.
-              </Text>
-            </View>
-
-            <View style={styles.detailDivider} />
-
-            <View style={styles.howBlock}>
-              <Text style={styles.howTitle}>Otobüs</Text>
-              <Text style={styles.howText}>
-                141 numaralı Boztepe belediye otobüsü ile de tepeye ulaşım sağlanabilmektedir.
-              </Text>
-            </View>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconQr]}>
-                <Ionicons name="time-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Ziyaret Bilgileri</Text>
-            </View>
-
-            <View style={[styles.detailBullets, { marginTop: 10 }]}>
-              <Text style={styles.detailBullet}>- Ortalama süre: 1-2 saat</Text>
-              <Text style={styles.detailBullet}>- En uygun zaman: Akşamüstü / Gece manzarası için akşam</Text>
-              <Text style={styles.detailBullet}>- Not: Semaver çayı eşliğinde manzara önerilir.</Text>
-            </View>
-          </View>
         </ScrollView>
       </View>
-    );
-  }
 
-  if (view === 'botanik') {
-    const cover = require('../assets/places/botanik.jpg');
-
-    return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
+      {/* Dogal list */}
+      <View style={{ display: view === 'dogal' ? 'flex' : 'none', flex: 1 }}>
         <ScrollView
+          ref={dogalScrollRef}
           contentContainerStyle={[
             styles.scroll,
             { paddingBottom: tabBarHeight + 28 },
           ]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
-        >
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Geri"
-            onPress={() => setView('dogal')}
-            style={({ pressed }) => [
-              styles.backBtn,
-              pressed && { opacity: 0.9 },
-            ]}
-            hitSlop={10}
-          >
-            <Ionicons name="chevron-back" size={18} color={colors.textPrimary} />
-            <Text style={styles.backText}>Doğal Güzellikler</Text>
-          </Pressable>
-
-          <View style={[styles.detailCoverCard, cardShadow]}>
-            <ImageBackground
-              source={cover}
-              style={styles.detailCoverImg}
-              imageStyle={styles.detailCoverImgRadius}
-              resizeMode="cover"
-            >
-              <View style={styles.detailCoverOverlay} />
-            </ImageBackground>
-          </View>
-
-          <Text style={styles.detailTitle}>Trabzon Botanik Bahçesi</Text>
-          <Text style={styles.detailMeta}>Ortahisar / Botanik Bahçesi</Text>
-
-          <View style={styles.detailTags}>
-            {['Doğa', 'Botanik', 'Yürüyüş', 'Huzur'].map((t) => (
-              <View key={t} style={styles.natureTag}>
-                <Text style={styles.natureTagText}>{t}</Text>
-              </View>
-            ))}
-          </View>
-
-          <Text style={styles.detailDesc}>
-            Çamoba bölgesinde yer alan Trabzon Botanik Bahçesi, zengin bitki çeşitliliği, yürüyüş yolları, göletleri ve ahşap yapılarıyla doğayla baş başa vakit geçirmek isteyenler için harika bir adrestir.
-          </Text>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons
-                  name="restaurant-outline"
-                  size={18}
-                  color={colors.secondary}
-                />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Mekan Önerileri</Text>
-            </View>
-
-            <View style={styles.restaurantCard}>
-              <Text style={styles.restaurantName}>Botanik Sosyal Tesisleri & Cafe</Text>
-              <Pressable
-                accessibilityRole="button"
-                accessibilityLabel="Haritada Aç"
-                onPress={() => openUrl('https://maps.app.goo.gl/BotanikSosyalTesis')}
-                style={({ pressed }) => [
-                  styles.restaurantBtn,
-                  pressed && { opacity: 0.92 },
-                ]}
-              >
-                <Text style={styles.restaurantBtnText}>Haritada Aç</Text>
-                <Ionicons name="open-outline" size={18} color={colors.secondary} />
-              </Pressable>
-            </View>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons name="pin-outline" size={18} color={colors.secondary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Konum</Text>
-            </View>
-
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Haritada Aç"
-              onPress={() => openUrl('https://maps.app.goo.gl/d8E4L2wV46N3X9sR6')}
-              style={({ pressed }) => [
-                styles.primaryBtn,
-                pressed && styles.pressed,
-              ]}
-            >
-              <Text style={styles.primaryBtnText}>Haritada Aç</Text>
-              <Ionicons name="open-outline" size={18} color={colors.surface} />
-            </Pressable>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconStops]}>
-                <Ionicons name="navigate-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Nasıl Gidilir?</Text>
-            </View>
-
-            <View style={styles.howBlock}>
-              <Text style={styles.howTitle}>Dolmuş</Text>
-              <Text style={styles.howText}>
-                Meydan bölgesinden kalkan Çamoba dolmuşları ile bahçe girişine kadar ulaşım sağlayabilirsiniz.
-              </Text>
-            </View>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconQr]}>
-                <Ionicons name="time-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Ziyaret Bilgileri</Text>
-            </View>
-
-            <View style={[styles.detailBullets, { marginTop: 10 }]}>
-              <Text style={styles.detailBullet}>- Ortalama süre: 1-2 saat</Text>
-              <Text style={styles.detailBullet}>- Giriş: Belediye tarafından belirlenen küçük bir giriş ücreti bulunmaktadır.</Text>
-              <Text style={styles.detailBullet}>- Not: Çocuk oyun alanları ve dinlenme çardakları mevcuttur.</Text>
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
-
-  if (view === 'zagnos') {
-    const cover = require('../assets/places/zagnos-park.jpg');
-
-    return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
-        <ScrollView
-          contentContainerStyle={[
-            styles.scroll,
-            { paddingBottom: tabBarHeight + 28 },
-          ]}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-        >
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Geri"
-            onPress={() => setView('dogal')}
-            style={({ pressed }) => [
-              styles.backBtn,
-              pressed && { opacity: 0.9 },
-            ]}
-            hitSlop={10}
-          >
-            <Ionicons name="chevron-back" size={18} color={colors.textPrimary} />
-            <Text style={styles.backText}>Doğal Güzellikler</Text>
-          </Pressable>
-
-          <View style={[styles.detailCoverCard, cardShadow]}>
-            <ImageBackground
-              source={cover}
-              style={styles.detailCoverImg}
-              imageStyle={styles.detailCoverImgRadius}
-              resizeMode="cover"
-            >
-              <View style={styles.detailCoverOverlay} />
-            </ImageBackground>
-          </View>
-
-          <Text style={styles.detailTitle}>Zağnos Vadisi Parkı</Text>
-          <Text style={styles.detailMeta}>Ortahisar / Kent Parkı</Text>
-
-          <View style={styles.detailTags}>
-            {['Vadi', 'Kent Parkı', 'Tarihi Surlar', 'Yürüyüş'].map((t) => (
-              <View key={t} style={styles.natureTag}>
-                <Text style={styles.natureTagText}>{t}</Text>
-              </View>
-            ))}
-          </View>
-
-          <Text style={styles.detailDesc}>
-            Kentsel dönüşüm projesiyle yeşil bir vadiye dönüştürülen Zağnos Vadisi, tarihi surların gölgesinde yapay göletleri, köprüleri, yürüyüş yolları ve dinlenme alanlarıyla şehrin merkezinde devasa bir yeşil alandır.
-          </Text>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons
-                  name="restaurant-outline"
-                  size={18}
-                  color={colors.secondary}
-                />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Mekan Önerileri</Text>
-            </View>
-
-            <View style={styles.restaurantCard}>
-              <Text style={styles.restaurantName}>Zağnos Vadi Kafe</Text>
-              <Pressable
-                accessibilityRole="button"
-                accessibilityLabel="Haritada Aç"
-                onPress={() => openUrl('https://maps.app.goo.gl/zagnos')}
-                style={({ pressed }) => [
-                  styles.restaurantBtn,
-                  pressed && { opacity: 0.92 },
-                ]}
-              >
-                <Text style={styles.restaurantBtnText}>Haritada Aç</Text>
-                <Ionicons name="open-outline" size={18} color={colors.secondary} />
-              </Pressable>
-            </View>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
-                <Ionicons name="pin-outline" size={18} color={colors.secondary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Konum</Text>
-            </View>
-
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Haritada Aç"
-              onPress={() => openUrl('https://maps.app.goo.gl/ZağnosVadisi')}
-              style={({ pressed }) => [
-                styles.primaryBtn,
-                pressed && styles.pressed,
-              ]}
-            >
-              <Text style={styles.primaryBtnText}>Haritada Aç</Text>
-              <Ionicons name="open-outline" size={18} color={colors.surface} />
-            </Pressable>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconStops]}>
-                <Ionicons name="navigate-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Nasıl Gidilir?</Text>
-            </View>
-
-            <View style={styles.howBlock}>
-              <Text style={styles.howTitle}>Yürüyüş</Text>
-              <Text style={styles.howText}>
-                Meydan bölgesinden veya Trabzon Kalesi çevresinden yürüyerek 5-10 dakikada vadiye inebilirsiniz.
-              </Text>
-            </View>
-
-            <View style={styles.detailDivider} />
-
-            <View style={styles.howBlock}>
-              <Text style={styles.howTitle}>Dolmuş / Otobüs</Text>
-              <Text style={styles.howText}>
-                Şehir içi ulaşım hatlarının büyük çoğunluğu Zağnos Köprüsü ve vadi yakınından geçmektedir.
-              </Text>
-            </View>
-          </View>
-
-          <View style={[styles.infoCard, cardShadow]}>
-            <View style={styles.sectionHeader}>
-              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconQr]}>
-                <Ionicons name="time-outline" size={18} color={colors.primary} />
-              </View>
-              <Text style={styles.sectionHeaderTitle}>Ziyaret Bilgileri</Text>
-            </View>
-
-            <View style={[styles.detailBullets, { marginTop: 10 }]}>
-              <Text style={styles.detailBullet}>- Ortalama süre: 1 saat</Text>
-              <Text style={styles.detailBullet}>- Giriş: Ücretsiz ve halka açık</Text>
-              <Text style={styles.detailBullet}>- Not: Park içerisinde yer alan kuğular ve ördekler özellikle çocukların ilgisini çekmektedir.</Text>
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
-
-  if (view === 'dogal') {
-    return (
-      <View style={[styles.root, { paddingTop: insets.top }]}>
-        <ScrollView
-          contentContainerStyle={[
-            styles.scroll,
-            { paddingBottom: tabBarHeight + 28 },
-          ]}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
+          onScroll={(event) => {
+            const offsetY = event.nativeEvent.contentOffset.y;
+            setShowListStickyBack(offsetY > 180);
+          }}
+          scrollEventThrottle={16}
         >
           <Pressable
             accessibilityRole="button"
@@ -776,7 +351,8 @@ export function PlacesTabScreen() {
                 accessibilityRole="button"
                 accessibilityLabel={p.title}
                 onPress={() => {
-                  setView(p.key as PlacesView);
+                  setSelectedNature(p);
+                  setView('dogal-detail');
                 }}
                 style={({ pressed }) => [
                   styles.natureCard,
@@ -815,147 +391,301 @@ export function PlacesTabScreen() {
             ))}
           </View>
         </ScrollView>
+        {showListStickyBack && view === 'dogal' && (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Geri Dön"
+            onPress={() => setView('root')}
+            style={({ pressed }) => [
+              styles.stickyBackBtn,
+              pressed && { opacity: 0.8, transform: [{ scale: 0.95 }] },
+            ]}
+          >
+            <Ionicons name="chevron-back" size={24} color={colors.secondary} />
+          </Pressable>
+        )}
       </View>
-    );
-  }
 
-  if (view === 'tarihi') {
-    return (
-      <HistoricalPlacesScreen
-        onBack={() => setView('root')}
-        onSelect={(place) => {
-          setSelectedHistorical(place);
-          setView('tarihi-detail');
-        }}
-      />
-    );
-  }
+      {/* Dogal detail */}
+      {view === 'dogal-detail' && selectedNature && (
+        <ScrollView
+          contentContainerStyle={[
+            styles.scroll,
+            { paddingBottom: tabBarHeight + 28 },
+          ]}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          onScroll={(event) => {
+            const offsetY = event.nativeEvent.contentOffset.y;
+            setShowStickyBack(offsetY > 150);
+          }}
+          scrollEventThrottle={16}
+        >
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Geri"
+            onPress={() => setView('dogal')}
+            style={({ pressed }) => [
+              styles.backBtn,
+              pressed && { opacity: 0.9 },
+            ]}
+            hitSlop={10}
+          >
+            <Ionicons name="chevron-back" size={18} color={colors.textPrimary} />
+            <Text style={styles.backText}>Doğal Güzellikler</Text>
+          </Pressable>
 
-  if (view === 'tarihi-detail' && selectedHistorical) {
-    return (
-      <HistoricalPlaceDetailScreen
-        place={selectedHistorical}
-        onBack={() => setView('tarihi')}
-      />
-    );
-  }
-
-  if (view === 'parklar') {
-    return (
-      <ParksScreen
-        onBack={() => setView('root')}
-        onSelect={(park) => {
-          setSelectedPark(park);
-          setView('parklar-detail');
-        }}
-      />
-    );
-  }
-
-  if (view === 'parklar-detail' && selectedPark) {
-    return (
-      <ParkDetailScreen
-        park={selectedPark}
-        onBack={() => setView('parklar')}
-      />
-    );
-  }
-
-  if (view === 'manzara') {
-    return (
-      <ViewpointsScreen
-        onBack={() => setView('root')}
-        onSelect={(spot) => {
-          setSelectedViewpoint(spot);
-          setView('manzara-detail');
-        }}
-      />
-    );
-  }
-
-  if (view === 'manzara-detail' && selectedViewpoint) {
-    return (
-      <ViewpointDetailScreen
-        spot={selectedViewpoint}
-        onBack={() => setView('manzara')}
-      />
-    );
-  }
-
-
-
-  if (view === 'isletme') {
-    return (
-      <BusinessScreen
-        onBack={() => setView('root')}
-        onSelect={(spot) => {
-          setSelectedBusiness(spot);
-          setView('isletme-detail');
-        }}
-      />
-    );
-  }
-
-  if (view === 'isletme-detail' && selectedBusiness) {
-    return (
-      <BusinessDetailScreen
-        spot={selectedBusiness}
-        onBack={() => setView('isletme')}
-      />
-    );
-  }
-
-  return (
-    <View style={[styles.root, { paddingTop: insets.top }]}>
-      <ScrollView
-        contentContainerStyle={[
-          styles.scroll,
-          { paddingBottom: tabBarHeight + 28 },
-        ]}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.hero}>
-          <View style={styles.heroBadge}>
-            <Ionicons name="trail-sign-outline" size={18} color={colors.secondary} />
-            <Text style={styles.heroBadgeText}>Şehir rehberi</Text>
+          <View style={[styles.detailCoverCard, cardShadow]}>
+            <ImageBackground
+              source={selectedNature.image}
+              style={styles.detailCoverImg}
+              imageStyle={styles.detailCoverImgRadius}
+              resizeMode="cover"
+            >
+              <View style={styles.detailCoverOverlay} />
+            </ImageBackground>
           </View>
-          <Text style={styles.heroTitle}>Gezilecek Yerler</Text>
-          <Text style={styles.heroLead}>
-            İlçelere dağılan doğa ve tarih duraklarından Boztepe manzarasına —
-            Trabzon gezisinde öncelik vereceğin başlıklar.
-          </Text>
-        </View>
 
-        <Text style={styles.sectionLabel}>Kategoriler</Text>
-        <View style={styles.catWrap}>
-          {PLACE_CATEGORIES.map((c) => (
+          <Text style={styles.detailTitle}>{selectedNature.title}</Text>
+          <Text style={styles.detailMeta}>{selectedNature.meta}</Text>
+
+          <View style={styles.detailTags}>
+            {selectedNature.tags.map((t) => (
+              <View key={t} style={styles.natureTag}>
+                <Text style={styles.natureTagText}>{t}</Text>
+              </View>
+            ))}
+          </View>
+
+          <Text style={styles.detailDesc}>{selectedNature.description}</Text>
+
+          {selectedNature.restaurantSuggestion && (
+            <View style={[styles.infoCard, cardShadow]}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
+                  <Ionicons
+                    name="restaurant-outline"
+                    size={18}
+                    color={colors.secondary}
+                  />
+                </View>
+                <Text style={styles.sectionHeaderTitle}>Mekan Önerileri</Text>
+              </View>
+
+              <View style={styles.restaurantCard}>
+                <Text style={styles.restaurantName}>{selectedNature.restaurantSuggestion.name}</Text>
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel="Haritada Aç"
+                  onPress={() => openUrl(selectedNature.restaurantSuggestion!.mapUrl)}
+                  style={({ pressed }) => [
+                    styles.restaurantBtn,
+                    pressed && { opacity: 0.92 },
+                  ]}
+                >
+                  <Text style={styles.restaurantBtnText}>Haritada Aç</Text>
+                  <Ionicons name="open-outline" size={18} color={colors.secondary} />
+                </Pressable>
+              </View>
+              <Text style={styles.restaurantNote}>
+                Öneriler herhangi bir reklam veya sponsorluk
+                içermemektedir. Mekanlar yalnızca ziyaretçilere fikir vermesi
+                amacıyla örnek olarak paylaşılmıştır.
+              </Text>
+            </View>
+          )}
+
+          <View style={[styles.infoCard, cardShadow]}>
+            <View style={styles.sectionHeader}>
+              <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconMap]}>
+                <Ionicons name="pin-outline" size={18} color={colors.secondary} />
+              </View>
+              <Text style={styles.sectionHeaderTitle}>Konum</Text>
+            </View>
+
             <Pressable
-              key={c.key}
+              accessibilityRole="button"
+              accessibilityLabel="Haritada Aç"
+              onPress={() => openUrl(selectedNature.locationMapUrl)}
               style={({ pressed }) => [
-                styles.catCard,
-                cardShadow,
+                styles.primaryBtn,
                 pressed && styles.pressed,
               ]}
-              accessibilityRole="button"
-              accessibilityLabel={c.label}
-              onPress={() => {
-                if (c.key === 'dogal') setView('dogal');
-                if (c.key === 'tarihi') setView('tarihi');
-                if (c.key === 'park') setView('parklar');
-                if (c.key === 'manzara') setView('manzara');
-
-                if (c.key === 'isletme') setView('isletme');
-              }}
             >
-              <View style={styles.catIcon}>
-                <Ionicons name={c.icon} size={22} color={colors.primary} />
-              </View>
-              <Text style={styles.catTitle}>{c.label}</Text>
+              <Text style={styles.primaryBtnText}>Haritada Aç</Text>
+              <Ionicons name="open-outline" size={18} color={colors.surface} />
             </Pressable>
-          ))}
-        </View>
+          </View>
 
-      </ScrollView>
+          {selectedNature.transport?.kind === 'two' && (
+            <View style={[styles.infoCard, cardShadow]}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconStops]}>
+                  <Ionicons name="navigate-outline" size={18} color={colors.primary} />
+                </View>
+                <Text style={styles.sectionHeaderTitle}>Nasıl Gidilir?</Text>
+              </View>
+
+              <View style={styles.howBlock}>
+                <Text style={styles.howTitle}>Dolmuş</Text>
+                <Text style={styles.howText}>{selectedNature.transport.dolmusText}</Text>
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel="Dolmuş Bilgilerine Git"
+                  onPress={() => navigation.navigate('Transport', { detailKey: 'dolmus' })}
+                  style={({ pressed }) => [styles.secondaryBtn, pressed && { opacity: 0.92 }]}
+                >
+                  <Text style={styles.secondaryBtnText}>Dolmuş Bilgilerine Git</Text>
+                  <Ionicons name="chevron-forward" size={18} color={colors.secondary} />
+                </Pressable>
+              </View>
+
+              <View style={styles.divider} />
+
+              <View style={styles.howBlock}>
+                <Text style={styles.howTitle}>Otobüs</Text>
+                <Text style={styles.howText}>{selectedNature.transport.otobusText}</Text>
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel="Otobüs Bilgilerine Git"
+                  onPress={() => navigation.navigate('Transport', { detailKey: 'otobus' })}
+                  style={({ pressed }) => [styles.secondaryBtn, pressed && { opacity: 0.92 }]}
+                >
+                  <Text style={styles.secondaryBtnText}>Otobüs Bilgilerine Git</Text>
+                  <Ionicons name="chevron-forward" size={18} color={colors.secondary} />
+                </Pressable>
+              </View>
+            </View>
+          )}
+
+          {selectedNature.transport?.kind === 'single' && (
+            <View style={[styles.infoCard, cardShadow]}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconStops]}>
+                  <Ionicons name="navigate-outline" size={18} color={colors.primary} />
+                </View>
+                <Text style={styles.sectionHeaderTitle}>{selectedNature.transport.title}</Text>
+              </View>
+              <Text style={[styles.howText, { marginTop: 10 }]}>
+                {selectedNature.transport.text}
+              </Text>
+            </View>
+          )}
+
+          {selectedNature.visitBullets && selectedNature.visitBullets.length > 0 && (
+            <View style={[styles.infoCard, cardShadow]}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.sectionHeaderIcon, styles.sectionHeaderIconQr]}>
+                  <Ionicons name="time-outline" size={18} color={colors.primary} />
+                </View>
+                <Text style={styles.sectionHeaderTitle}>Ziyaret Bilgileri</Text>
+              </View>
+
+              <View style={[styles.detailBullets, { marginTop: 10 }]}>
+                {selectedNature.visitBullets.map((bullet, index) => (
+                  <Text key={index} style={styles.detailBullet}>
+                    {bullet}
+                  </Text>
+                ))}
+              </View>
+            </View>
+          )}
+        </ScrollView>
+      )}
+
+      {/* Tarihi list */}
+      <View style={{ display: view === 'tarihi' ? 'flex' : 'none', flex: 1 }}>
+        <HistoricalPlacesScreen
+          onBack={() => setView('root')}
+          onSelect={(place) => {
+            setSelectedHistorical(place);
+            setView('tarihi-detail');
+          }}
+          view={view}
+        />
+      </View>
+
+      {/* Tarihi detail */}
+      {view === 'tarihi-detail' && selectedHistorical && (
+        <HistoricalPlaceDetailScreen
+          place={selectedHistorical}
+          onBack={() => setView('tarihi')}
+        />
+      )}
+
+      {/* Parklar list */}
+      <View style={{ display: view === 'parklar' ? 'flex' : 'none', flex: 1 }}>
+        <ParksScreen
+          onBack={() => setView('root')}
+          onSelect={(park) => {
+            setSelectedPark(park);
+            setView('parklar-detail');
+          }}
+          view={view}
+        />
+      </View>
+
+      {/* Parklar detail */}
+      {view === 'parklar-detail' && selectedPark && (
+        <ParkDetailScreen
+          park={selectedPark}
+          onBack={() => setView('parklar')}
+        />
+      )}
+
+      {/* Manzara list */}
+      <View style={{ display: view === 'manzara' ? 'flex' : 'none', flex: 1 }}>
+        <ViewpointsScreen
+          onBack={() => setView('root')}
+          onSelect={(spot) => {
+            setSelectedViewpoint(spot);
+            setView('manzara-detail');
+          }}
+          view={view}
+        />
+      </View>
+
+      {/* Manzara detail */}
+      {view === 'manzara-detail' && selectedViewpoint && (
+        <ViewpointDetailScreen
+          spot={selectedViewpoint}
+          onBack={() => setView('manzara')}
+        />
+      )}
+
+      {/* Isletme list */}
+      <View style={{ display: view === 'isletme' ? 'flex' : 'none', flex: 1 }}>
+        <BusinessScreen
+          onBack={() => setView('root')}
+          onSelect={(spot) => {
+            setSelectedBusiness(spot);
+            setView('isletme-detail');
+          }}
+          view={view}
+        />
+      </View>
+
+      {/* Isletme detail */}
+      {view === 'isletme-detail' && selectedBusiness && (
+        <BusinessDetailScreen
+          spot={selectedBusiness}
+          onBack={() => setView('isletme')}
+        />
+      )}
+      {/* Sticky Back Button for dogal-detail */}
+      {showStickyBack && view === 'dogal-detail' && (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Geri Dön"
+          onPress={() => setView('dogal')}
+          style={({ pressed }) => [
+            styles.stickyBackBtn,
+            pressed && { opacity: 0.8, transform: [{ scale: 0.95 }] },
+          ]}
+        >
+          <Ionicons name="chevron-back" size={24} color={colors.secondary} />
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -1465,5 +1195,28 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '800',
     color: colors.secondary,
+  },
+  divider: {
+    marginTop: 16,
+    height: 1,
+    backgroundColor: colors.border,
+  },
+  stickyBackBtn: {
+    position: 'absolute',
+    left: 0,
+    top: '50%',
+    marginTop: -30,
+    width: 40,
+    height: 60,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderLeftWidth: 0,
+    elevation: 5,
+    zIndex: 999,
   },
 });
